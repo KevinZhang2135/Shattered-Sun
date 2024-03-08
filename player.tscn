@@ -111,7 +111,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 8.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -139,8 +139,8 @@ animations = [{
 "texture": SubResource("AtlasTexture_khmnj")
 }],
 "loop": true,
-"name": &"run",
-"speed": 12.0
+"name": &"running",
+"speed": 30.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqy02"]
@@ -152,7 +152,8 @@ script = ExtResource("1_fw2g3")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_plbf7")
-frame_progress = 0.00731167
+autoplay = "default"
+frame_progress = 0.0215775
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_dqy02")

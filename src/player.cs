@@ -9,7 +9,21 @@ public partial class player : CharacterBody2D
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
+	// Get the animation child node
+	AnimatedSprite2D animation = null;
+
+	public override void _Ready()
+	{
+		animation = GetNode<AnimatedSprite2D>("animation");
+	}
+
 	public override void _PhysicsProcess(double delta)
+	{
+		Movement(delta);
+		Animation();
+	}
+
+	private void Movement(double delta)
 	{
 		Vector2 velocity = Velocity;
 
@@ -30,10 +44,34 @@ public partial class player : CharacterBody2D
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed / 10);
 		}
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	private void Animation()
+	{
+		// Mirrors sprite to match movement
+		if (Velocity.X < 0)
+		{
+			animation.FlipH = true;
+
+		}
+		else if (Velocity.X > 0)
+		{
+			animation.FlipH = false;
+		}
+
+		// Handles the animation state to match player controls
+		if (Math.Abs(Velocity.X) > Speed / 100)
+		{
+			animation.Animation = "running";
+		}
+		else
+		{
+			animation.Animation = "default";
+		}
 	}
 }
