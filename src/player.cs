@@ -3,7 +3,7 @@ using System;
 
 public partial class player : CharacterBody2D
 {
-	public const float Speed = 300.0f;
+	public const float Speed = 400.0f;
 	public const float JumpVelocity = -400.0f;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -54,15 +54,8 @@ public partial class player : CharacterBody2D
 	private void Animation()
 	{
 		// Mirrors sprite to match movement
-		if (Velocity.X < 0)
-		{
-			animation.FlipH = true;
-
-		}
-		else if (Velocity.X > 0)
-		{
-			animation.FlipH = false;
-		}
+		if (Velocity.X != 0)
+			animation.FlipH = Velocity.X < 0;
 
 		// Handles the animation state to match player controls
 		if (Math.Abs(Velocity.X) > Speed / 100)
