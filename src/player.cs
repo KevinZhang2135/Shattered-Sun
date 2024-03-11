@@ -57,13 +57,20 @@ public partial class player : CharacterBody2D
 			animation.FlipH = Velocity.X < 0;
 
 		// Handles the animation state to match player controls
+		
 		if (Math.Abs(Velocity.X) > Speed / 100)
 		{
 			animation.Animation = "running";
-		}
-		else
-		{
+			
+		} else {
 			animation.Animation = "default";
+		}
+
+		if (Velocity.Y < 0) {
+			animation.Animation = "jumping";
+		}
+		else if (Velocity.Y > 0) {
+			animation.Animation = "falling";
 		}
 	}
 }
