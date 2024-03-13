@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://wy2nigsy3yji"]
+
+[ext_resource type="Texture2D" uid="uid://c47qnv64rs5m" path="res://res/terrain/background.png" id="1_fd37c"]
+
+[node name="parallax_background" type="ParallaxBackground"]
+metadata/_edit_horizontal_guides_ = [0.0]
+
+[node name="sky1" type="ParallaxLayer" parent="."]
+scale = Vector2(1.01231, 1)
+motion_scale = Vector2(0.2, 2.08165e-12)
+motion_mirroring = Vector2(1152, 2.08165e-12)
+
+[node name="sky" type="Sprite2D" parent="sky1"]
+texture = ExtResource("1_fd37c")
+centered = false

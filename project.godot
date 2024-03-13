@@ -11,14 +11,12 @@ config_version=5
 [application]
 
 config/name="shattered_sun"
-run/main_scene="res://main.tscn"
+run/main_scene="res://level1.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
 window/stretch/scale=1.25
 
 [dotnet]
@@ -45,7 +43,7 @@ jump={
 
 [physics]
 
-2d/default_gravity=1320.0
+2d/default_gravity=2000.0
 2d/default_gravity_vector=Vector2(2.08165e-12, 1)
 
 [rendering]

@@ -182,3 +182,7 @@ autoplay = "default"
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_dqy02")
+
+[node name="camera" type="Camera2D" parent="."]
+scale = Vector2(0.997716, 0.995331)
+zoom = Vector2(2, 2)
