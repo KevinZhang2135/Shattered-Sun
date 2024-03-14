@@ -1,30 +1,19 @@
 using Godot;
 using System;
 
-public partial class player : CharacterBody2D
+public partial class player : entity
 {
-	public const float Speed = 1.5f * 400.0f;
-	public const float JumpVelocity = 10 * 400.0f;
-
-	// Get the gravity from the project settings to be synced with RigidBody nodes.
-	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-
-	// Get the animation child node
-	AnimatedSprite2D animation = null;
-
-	// Initializer for Godot node
+	
 	public override void _Ready()
 	{
+		Speed = 400.0f;
+		JumpVelocity = 480.0f;
+
+		
 		animation = GetNode<AnimatedSprite2D>("animation");
 	}
 
-	public override void _PhysicsProcess(double delta)
-	{
-		Movement(delta);
-		Animation();
-	}
-
-	private void Movement(double delta)
+	protected override void Movement(double delta)
 	{
 		Vector2 velocity = Velocity;
 
@@ -49,29 +38,5 @@ public partial class player : CharacterBody2D
 
 		Velocity = velocity;
 		MoveAndSlide();
-	}
-
-	private void Animation()
-	{
-		// Mirrors sprite to match movement
-		if (Velocity.X != 0)
-			animation.FlipH = Velocity.X < 0;
-
-		// Handles the animation state to match player controls
-		
-		if (Math.Abs(Velocity.X) > Speed / 100)
-		{
-			animation.Play("running");
-
-		} else {
-			animation.Play("default");
-		}
-
-		if (Velocity.Y < 0) {
-			animation.Play("jumping");
-		}
-		else if (Velocity.Y > 0) {
-			animation.Play("falling");
-		}
 	}
 }
