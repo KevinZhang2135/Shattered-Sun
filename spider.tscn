@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://houh48gu1bac"]
+
+[ext_resource type="Texture2D" uid="uid://cs118ymhrfk2u" path="res://res/enemies/spider.png" id="1_aey3p"]
+[ext_resource type="Script" path="res://src/Spider.cs" id="2_2mk8s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ipad"]
+atlas = ExtResource("1_aey3p")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cd8g3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ipad")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0rh3"]
+size = Vector2(20, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vtr0k"]
+size = Vector2(230.531, 20)
+
+[node name="spider" type="CharacterBody2D"]
+script = ExtResource("2_2mk8s")
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cd8g3")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_w0rh3")
+
+[node name="detection" type="Area2D" parent="."]
+position = Vector2(0, 5)
+
+[node name="detection_rect" type="CollisionShape2D" parent="detection"]
+position = Vector2(7.62939e-06, -1.97047e-21)
+scale = Vector2(-1.34453, 1.1773)
+shape = SubResource("RectangleShape2D_vtr0k")
+
+[connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="detection" to="." method="_on_detection_body_exited"]

@@ -1,10 +1,10 @@
 using Godot;
 using System;
 
-public abstract partial class entity : CharacterBody2D
+public abstract partial class Entity : CharacterBody2D
 {
-	public float Speed;
-	public float JumpVelocity;
+	public float speed;
+	public float jumpVelocity;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -12,55 +12,27 @@ public abstract partial class entity : CharacterBody2D
 	// Get the animation child node
 	protected AnimatedSprite2D animation;
 
-	// Initializer for Godot node
+	// Initializer for Godot node when it enters scene
 	public override void _Ready()
-	{	
-		Speed = 0f;
-		JumpVelocity = 0f;
+	{
+		speed = 0f;
+		jumpVelocity = 0f;
 
 		animation = null;
 	}
 
-	// Physics handler for Godot node; updated every tick
+	// Physics handler which updates every tick
 	public override void _PhysicsProcess(double delta)
 	{
 		Movement(delta);
-		Animation();
 		MoveAndSlide();
+
+		Animation();
 	}
 
-
-	// Movement handler, including gravity and controls
+	// Handles gravity and controls
 	protected abstract void Movement(double delta);
 
-	// Animation handler
-	protected void Animation()
-	{
-		if (animation == null) 
-			return;
-
-		// Mirrors sprite to match movement
-		if (Velocity.X != 0)
-			animation.FlipH = Velocity.X < 0;
-
-		// Handles the animation state to match player controls
-		if (Math.Abs(Velocity.X) > Speed / 100)
-		{
-			animation.Play("running");
-
-		}
-		else
-		{
-			animation.Play("default");
-		}
-
-		if (Velocity.Y < 0)
-		{
-			animation.Play("jumping");
-		}
-		else if (Velocity.Y > 0)
-		{
-			animation.Play("falling");
-		}
-	}
+	// Updates sprite animation according to movement
+	protected abstract void Animation();
 }
