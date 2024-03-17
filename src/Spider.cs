@@ -10,7 +10,7 @@ public partial class Spider : Entity
 
 	public override void _Ready()
 	{
-		speed = 640.0f;
+		speed = 540.0f;
 		jumpVelocity = 600.0f;
 
 		chase = false;

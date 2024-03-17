@@ -1,10 +1,10 @@
 [gd_scene load_steps=28 format=3 uid="uid://bqssvixagjghp"]
 
-[ext_resource type="Texture2D" uid="uid://bswk53x4gytty" path="res://res/player/run.png" id="1_0261a"]
+[ext_resource type="Texture2D" uid="uid://bswk53x4gytty" path="res://res/player/player_run.png" id="1_0261a"]
 [ext_resource type="Script" path="res://src/Player.cs" id="1_fw2g3"]
-[ext_resource type="Texture2D" uid="uid://7qycq3h42v0u" path="res://res/player/idle.png" id="2_bi28n"]
-[ext_resource type="Texture2D" uid="uid://bi83gfkto6tuo" path="res://res/player/fall.png" id="3_c7wpg"]
-[ext_resource type="Texture2D" uid="uid://beu1cda3shgb5" path="res://res/player/jump.png" id="4_myfxw"]
+[ext_resource type="Texture2D" uid="uid://7qycq3h42v0u" path="res://res/player/player_idle.png" id="2_bi28n"]
+[ext_resource type="Texture2D" uid="uid://bi83gfkto6tuo" path="res://res/player/player_fall.png" id="3_c7wpg"]
+[ext_resource type="Texture2D" uid="uid://beu1cda3shgb5" path="res://res/player/player_jump.png" id="4_myfxw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3bq77"]
 atlas = ExtResource("2_bi28n")
