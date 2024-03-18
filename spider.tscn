@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://houh48gu1bac"]
+[gd_scene load_steps=15 format=3 uid="uid://houh48gu1bac"]
 
 [ext_resource type="Script" path="res://src/Spider.cs" id="2_2mk8s"]
 [ext_resource type="Texture2D" uid="uid://cs118ymhrfk2u" path="res://res/enemies/spider/spider_idle.png" id="2_wmxtx"]
@@ -40,7 +40,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -63,34 +63,46 @@ animations = [{
 }],
 "loop": true,
 "name": &"running",
-"speed": 12.0
+"speed": 16.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0rh3"]
-size = Vector2(20, 16)
+size = Vector2(24, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtr0k"]
-size = Vector2(230.531, 20)
+size = Vector2(311.617, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_esg43"]
+radius = 32.0
 
 [node name="spider" type="CharacterBody2D"]
+texture_filter = 1
 script = ExtResource("2_2mk8s")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.997648, 1)
 sprite_frames = SubResource("SpriteFrames_cd8g3")
+animation = &"running"
 autoplay = "default"
-frame_progress = 0.605381
 
 [node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(-2, 7)
 shape = SubResource("RectangleShape2D_w0rh3")
 
-[node name="detection" type="Area2D" parent="."]
+[node name="player_detection" type="Area2D" parent="."]
 position = Vector2(0, 5)
 
-[node name="detection_rect" type="CollisionShape2D" parent="detection"]
-position = Vector2(7.62939e-06, -1.97047e-21)
-scale = Vector2(-1.34453, 1.1773)
+[node name="detection_rect" type="CollisionShape2D" parent="player_detection"]
+position = Vector2(0, -1.72113e-29)
+rotation = 3.14159
+scale = Vector2(1.65402, 1.75383)
 shape = SubResource("RectangleShape2D_vtr0k")
 
-[connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
-[connection signal="body_exited" from="detection" to="." method="_on_detection_body_exited"]
+[node name="explosion_detection" type="Area2D" parent="."]
+position = Vector2(0, 5)
+
+[node name="detection_circle" type="CollisionShape2D" parent="explosion_detection"]
+shape = SubResource("CircleShape2D_esg43")
+
+[connection signal="body_entered" from="player_detection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_entered" from="explosion_detection" to="." method="_on_explosion_detection_body_entered"]

@@ -5,9 +5,14 @@ public partial class Player : Entity
 {
 	public override void _Ready()
 	{
+		health = 3;
+
+		// physics
 		speed = 600.0f;
 		jumpVelocity = 720.0f;
+		frictionCoefficient = 0.1f;
 
+		// child nodes
 		animation = GetNode<AnimatedSprite2D>("animation");
 	}
 
@@ -26,7 +31,10 @@ public partial class Player : Entity
 
 		// Get the input direction and handle the movement/deceleration.
 		float direction = Input.GetAxis("left", "right");
-		velocity.X = (direction != 0) ? direction * speed : Mathf.MoveToward(Velocity.X, 0, speed / 10);
+		velocity.X = (direction != 0)
+			? direction * speed
+			: Mathf.MoveToward(Velocity.X, 0, speed * frictionCoefficient);
+
 		Velocity = velocity;
 	}
 
