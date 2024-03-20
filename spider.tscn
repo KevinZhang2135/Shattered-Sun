@@ -144,10 +144,8 @@ script = ExtResource("2_2mk8s")
 [node name="animation" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.997648, 1)
 sprite_frames = SubResource("SpriteFrames_cd8g3")
-animation = &"explode"
 autoplay = "default"
-frame = 7
-frame_progress = 1.0
+frame_progress = 0.0444466
 
 [node name="collision" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 7)
