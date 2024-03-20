@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://lk2nl1cysrc0"]
+[gd_scene load_steps=8 format=3 uid="uid://lk2nl1cysrc0"]
 
 [ext_resource type="Texture2D" uid="uid://d3x38kltsftq7" path="res://res/terrain/bricks.png" id="2_f2ejj"]
 [ext_resource type="PackedScene" uid="uid://bqssvixagjghp" path="res://player.tscn" id="3_fi538"]
 [ext_resource type="PackedScene" uid="uid://houh48gu1bac" path="res://spider.tscn" id="3_o1b8y"]
 [ext_resource type="PackedScene" uid="uid://wy2nigsy3yji" path="res://parallax_background.tscn" id="4_51no0"]
+[ext_resource type="Script" path="res://src/PlayerHealth.cs" id="5_jybqa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0lubf"]
 texture = ExtResource("2_f2ejj")
@@ -131,7 +132,16 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0lubf")
 
-[node name="level1" type="Node"]
+[node name="level1" type="Node2D"]
+
+[node name="instructions" type="Label" parent="."]
+offset_left = 433.0
+offset_top = 326.0
+offset_right = 542.0
+offset_bottom = 375.0
+theme_override_font_sizes/font_size = 16
+text = "wasd to move
+space to jump"
 
 [node name="terrain" type="TileMap" parent="."]
 texture_filter = 1
@@ -150,3 +160,11 @@ position = Vector2(895, 273)
 scale = Vector2(2, 2)
 
 [node name="parallax_background" parent="." instance=ExtResource("4_51no0")]
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="player_health" type="Label" parent="ui"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+script = ExtResource("5_jybqa")

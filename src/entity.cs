@@ -27,6 +27,7 @@ public abstract partial class Entity : CharacterBody2D
 		frictionCoefficient = 1f;
 
 		animation = null;
+
 	}
 
 	// Physics handler which updates every tick
@@ -34,7 +35,10 @@ public abstract partial class Entity : CharacterBody2D
 	{
 		Movement(delta);
 		MoveAndSlide();
+	}
 
+	public override void _Process(double delta)
+	{
 		Animation();
 	}
 

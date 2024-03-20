@@ -50,7 +50,7 @@ public partial class Player : Entity
 
 		// Handles the animation state to match velocity
 		if (Math.Abs(Velocity.X) > speed / 100)
-			animation.Play("running");
+			animation.Play("run");
 
 		else
 			animation.Play("default");
@@ -58,11 +58,11 @@ public partial class Player : Entity
 
 		if (Velocity.Y < 0)
 
-			animation.Play("jumping");
+			animation.Play("jump");
 
 		else if (Velocity.Y > 0)
 
-			animation.Play("falling");
+			animation.Play("fall");
 
 	}
 }
