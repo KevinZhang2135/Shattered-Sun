@@ -27,7 +27,6 @@ public abstract partial class Entity : CharacterBody2D
 		frictionCoefficient = 1f;
 
 		animation = null;
-
 	}
 
 	// Physics handler which updates every tick

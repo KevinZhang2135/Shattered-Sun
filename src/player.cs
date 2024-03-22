@@ -17,8 +17,6 @@ public partial class Player : Entity
 
 		// child nodes
 		animation = GetNode<AnimatedSprite2D>("animation");
-
-		
 	}
 
 	// Handles gravity and controls
