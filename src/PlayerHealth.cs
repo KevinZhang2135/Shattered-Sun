@@ -8,7 +8,7 @@ public partial class PlayerHealth : Label
 
 	public override void _Ready()
 	{
-		player = GetNode<Player>("/root/level1/player");
+		player = GetNode<Player>("../../player");
 	}
 
 	public override void _Process(double delta)
