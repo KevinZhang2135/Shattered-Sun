@@ -3,17 +3,20 @@ using System;
 
 public partial class Player : Entity
 {
+	public Boolean controlInput;
 	public override void _Ready()
 	{
 		health = 3;
 
 		// physics
-		speed = 600.0f;
-		jumpVelocity = 720.0f;
-		frictionCoefficient = 0.1f;
+		speed = 360.0f;
+		jumpVelocity = 560.0f;
+		frictionCoefficient = 0.95f;
 
 		// child nodes
 		animation = GetNode<AnimatedSprite2D>("animation");
+
+		controlInput = true;
 	}
 
 	// Handles gravity and controls
@@ -22,7 +25,7 @@ public partial class Player : Entity
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
-		if (!IsOnFloor())
+		if (!IsOnFloor()) 
 			velocity.Y += gravity * (float)delta;
 
 		// Handle Jump.
@@ -31,9 +34,14 @@ public partial class Player : Entity
 
 		// Get the input direction and handle the movement/deceleration.
 		float direction = Input.GetAxis("left", "right");
-		velocity.X = (direction != 0)
-			? direction * speed
-			: Mathf.MoveToward(Velocity.X, 0, speed * frictionCoefficient);
+		if (direction != 0 && controlInput) {
+			velocity.X = Mathf.MoveToward(Velocity.X, direction * speed, speed / 20);
+
+		} else {
+			velocity.X = Mathf.MoveToward(Velocity.X, 0, speed * (1 - frictionCoefficient));
+			if (velocity.X == 0) 
+				controlInput = true;
+		}
 
 		Velocity = velocity;
 	}
@@ -50,19 +58,23 @@ public partial class Player : Entity
 
 		// Handles the animation state to match velocity
 		if (Math.Abs(Velocity.X) > speed / 100)
+		{
 			animation.Play("run");
-
+		}
 		else
+		{
 			animation.Play("default");
-
+		}
 
 		if (Velocity.Y < 0)
-
+		{
 			animation.Play("jump");
-
+		}
 		else if (Velocity.Y > 0)
-
+		{
 			animation.Play("fall");
+		}
+
 
 	}
 }
