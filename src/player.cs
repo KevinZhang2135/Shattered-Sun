@@ -13,10 +13,12 @@ public partial class Player : Entity
 		jumpVelocity = 560.0f;
 		frictionCoefficient = 0.95f;
 
+		controlInput = true;
+
 		// child nodes
 		animation = GetNode<AnimatedSprite2D>("animation");
 
-		controlInput = true;
+		
 	}
 
 	// Handles gravity and controls

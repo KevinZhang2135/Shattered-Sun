@@ -11,6 +11,8 @@ public partial class Spider : Entity
 	private bool chase;
 	private bool explode;
 
+	private int explosion_strength;
+
 	public override void _Ready()
 	{
 		// physics
@@ -20,6 +22,8 @@ public partial class Spider : Entity
 
 		chase = false;
 		explode = false;
+
+		explosion_strength = 1000;
 
 		// child nodes
 		animation = GetNode<AnimatedSprite2D>("animation");
@@ -112,7 +116,7 @@ public partial class Spider : Entity
 			collision_rect.QueueFree();
 
 			Vector2 knockback = Position.DirectionTo(player.Position);
-			player.Velocity = knockback * 1000;
+			player.Velocity = knockback * explosion_strength;
 			player.health--;
 			player.controlInput = false;
 
