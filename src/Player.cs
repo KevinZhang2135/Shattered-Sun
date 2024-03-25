@@ -32,14 +32,16 @@ public partial class Player : Entity
 		if (Input.IsActionJustPressed("jump") && IsOnFloor())
 			velocity.Y = -jumpVelocity;
 
-		// Get the input direction and handle the movement/deceleration.
+		// Get the input direction and handle the movement/acceleration.
 		float direction = Input.GetAxis("left", "right");
 		if (direction != 0 && controlInput) {
 			velocity.X = Mathf.MoveToward(Velocity.X, direction * speed, speed / 20);
 
 		} else {
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, speed * (1 - frictionCoefficient));
-			if (velocity.X == 0) 
+
+			// Regains player control 
+			if (Math.Abs(velocity.X) < speed / 20) 
 				controlInput = true;
 		}
 

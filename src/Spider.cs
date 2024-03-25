@@ -39,9 +39,8 @@ public partial class Spider : Entity
 	{
 		// does not move if exploding
 		if (explode)
-		{
 			return;
-		}
+
 
 		Vector2 velocity = Velocity;
 
@@ -73,9 +72,8 @@ public partial class Spider : Entity
 
 		// Mirrors sprite to match movement
 		if (Velocity.X != 0)
-		{
 			animation.FlipH = Velocity.X < 0;
-		}
+
 
 		// Handles the animation state to match velocity
 		if (Math.Abs(Velocity.X) > 0)
@@ -101,9 +99,8 @@ public partial class Spider : Entity
 	private void _on_player_detection_body_entered(Node2D body)
 	{
 		if (body.Name == "player")
-		{
 			chase = true;
-		}
+
 	}
 
 	// explodes upon contact with player
@@ -119,8 +116,6 @@ public partial class Spider : Entity
 			player.Velocity = knockback * explosion_strength;
 			player.health--;
 			player.controlInput = false;
-
-			GD.Print(knockback);
 
 			// explosion animation
 			animation.Play("explode");
